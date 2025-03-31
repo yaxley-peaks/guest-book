@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Entity
 public final class TodoEntry {
-    public TodoEntry(int userId, int id, String title, boolean completed) {
+    public TodoEntry(int userId,  String title, boolean completed) {
         this.userId = userId;
         this.id = id;
         this.title = title;
