@@ -3,7 +3,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    environment:
-      BASE_BACKEND_URL: https://jsonplaceholder.typicode.com
     ports:
       - "3000:80"

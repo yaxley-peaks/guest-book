@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:80"
     environment:
-      BASE_BACKEND_URL: https://jsonplaceholder.typicode.com
+      BASE_BACKEND_URL: http://100.103.10.60:8080
 #  backend:
 #    build:
 #      context: .

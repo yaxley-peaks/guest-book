@@ -9,7 +9,7 @@ function App() {
     const [searchText, setSearchText] = useState("");
     const latestTaskId = useRef(0);
 
-    const fetchUrl = import.meta.env.BASE_BACKEND_URL;
+    const fetchUrl = "http://100.103.10.60";
 
     useEffect(() => {
         const storedTasks = localStorage.getItem('tasks');
@@ -24,7 +24,7 @@ function App() {
             /*
             @type {List<any>}
             */
-            const fetchedTasks = await fetch(`${fetchUrl}/todos`)
+            const fetchedTasks = await fetch(`${fetchUrl}/todos/`)
                 .then(res => res.json());
             // for now
             const tasks = fetchedTasks.slice(0, 2)

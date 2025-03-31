@@ -2,7 +2,7 @@ FROM node:lts AS fe-build
 
 WORKDIR /app
 
-ENV BASE_BACKED_URL="https://jsonplaceholder.typicode.com"
+ENV BASE_BACKEND_URL="http://100.103.10.60"
 
 COPY frontend/package.json .
 COPY frontend/package-lock.json .
