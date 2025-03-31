@@ -9,6 +9,8 @@ function App() {
     const [searchText, setSearchText] = useState("");
     const latestTaskId = useRef(0);
 
+    const fetchUrl = import.meta.env.BASE_BACKEND_URL;
+
     useEffect(() => {
         const storedTasks = localStorage.getItem('tasks');
         if (storedTasks) {
@@ -22,7 +24,7 @@ function App() {
             /*
             @type {List<any>}
             */
-            const fetchedTasks = await fetch("https://jsonplaceholder.typicode.com/todos")
+            const fetchedTasks = await fetch(`${fetchUrl}/todos`)
                 .then(res => res.json());
             // for now
             const tasks = fetchedTasks.slice(0, 2)
