@@ -4,16 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 public final class TodoEntry {
     public TodoEntry(int userId,  String title, boolean completed) {
         this.userId = userId;
-        this.id = id;
         this.title = title;
         this.completed = completed;
     }
