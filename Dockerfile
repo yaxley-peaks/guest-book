@@ -2,7 +2,9 @@ FROM node:lts AS fe-build
 
 WORKDIR /app
 
-ENV BASE_BACKEND_URL="http://100.103.10.60"
+# VITE bakes in envars at prod time.
+# hence this cannot be provided via docker-compose
+ENV VITE_BASE_API_URL="http://100.103.10.60"
 
 COPY frontend/package.json .
 COPY frontend/package-lock.json .

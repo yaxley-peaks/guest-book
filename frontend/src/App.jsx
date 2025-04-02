@@ -5,11 +5,11 @@ import {TaskList} from "./components/TaskList.jsx";
 
 
 function App() {
-    const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? []);
+    const [tasks, setTasks] = useState(/*JSON.parse(localStorage.getItem('tasks')) ?? */[]);
     const [searchText, setSearchText] = useState("");
     const latestTaskId = useRef(0);
 
-    const fetchUrl = "http://100.103.10.60";
+    const fetchUrl = import.meta.env.VITE_BASE_API_URL;
 
     useEffect(() => {
         const storedTasks = localStorage.getItem('tasks');
@@ -32,7 +32,7 @@ function App() {
             setTasks(tasks.reverse());
         })();
 
-    }, []);
+    }, [fetchUrl]);
 
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
