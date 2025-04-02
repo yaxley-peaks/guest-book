@@ -5,39 +5,27 @@ import {TaskList} from "./components/TaskList.jsx";
 
 
 function App() {
-    const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? []);
+    const [tasks, setTasks] = useState([]);
     const [searchText, setSearchText] = useState("");
     const latestTaskId = useRef(0);
 
     const fetchUrl = import.meta.env.VITE_BASE_API_URL;
 
     useEffect(() => {
-        console.log(fetchUrl);
-        console.table(import.meta.env);
-        const storedTasks = localStorage.getItem('tasks');
-        if (storedTasks) {
-            const ts = JSON.parse(storedTasks)
-            setTasks(ts);
-            // we reverse the array when api fetch, but save it the correct way around
-            latestTaskId.current = ts.at(0)?.id ?? 1;
-            return;
-        }
         (async () => {
             /*
             @type {List<any>}
             */
             const fetchedTasks = await fetch(`${fetchUrl}/todos/`)
                 .then(res => res.json());
-            // for now
-            const tasks = fetchedTasks.slice(0, 2)
-            latestTaskId.current = tasks.at(-1).id;
-            setTasks(tasks.reverse());
+            latestTaskId.current = fetchedTasks.at(-1).id;
+            setTasks(fetchedTasks.reverse());
         })();
 
     }, [fetchUrl]);
 
     useEffect(() => {
-        // localStorage.setItem("tasks", JSON.stringify(tasks));
+        // post data to server here
     }, [tasks]);
 
     const taskAdderCallback = (title, status) => {
