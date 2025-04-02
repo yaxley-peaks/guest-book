@@ -29,6 +29,23 @@ function App() {
     }, [tasks]);
 
     const taskAdderCallback = (title, status) => {
+        (async () => {
+            const request = await fetch(`${fetchUrl}/todos/`, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    completed: status === 1,
+                    id: 0,
+                    userId: 1,
+                })
+            });
+            const json = await request.json();
+            setTasks([json, ...tasks]);
+        })();
         const newId = latestTaskId.current + 1;
         latestTaskId.current = newId;
         setTasks((tasks) => [{id: newId, title: title, completed: status === "1"}, ...tasks]);

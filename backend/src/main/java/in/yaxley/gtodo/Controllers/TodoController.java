@@ -3,8 +3,8 @@ package in.yaxley.gtodo.Controllers;
 import in.yaxley.gtodo.Entities.TodoEntry;
 import in.yaxley.gtodo.Repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +21,13 @@ public class TodoController {
     @GetMapping("/todos/")
     public List<TodoEntry> getTodos() {
         return (List<TodoEntry>) todos.findAll();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/todos/")
+    public TodoEntry addTodo(@RequestBody TodoEntry dto) {
+        TodoEntry entry = new TodoEntry(dto.getUserId(), dto.getTitle(), dto.isCompleted()) ;
+        todos.save(entry);
+        return entry;
     }
 }
