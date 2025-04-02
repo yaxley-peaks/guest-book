@@ -38,7 +38,7 @@ function App() {
                 },
                 body: JSON.stringify({
                     title: title,
-                    completed: status === 1,
+                    completed: status === "1",
                     id: 0,
                     userId: 1,
                 })
@@ -46,9 +46,6 @@ function App() {
             const json = await request.json();
             setTasks([json, ...tasks]);
         })();
-        const newId = latestTaskId.current + 1;
-        latestTaskId.current = newId;
-        setTasks((tasks) => [{id: newId, title: title, completed: status === "1"}, ...tasks]);
     }
     const taskEditCallback = (id, title) => {
         tasks.find(x => x.id === id).title = title;
