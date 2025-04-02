@@ -1,15 +1,25 @@
-FROM maven:3.9-amazoncorretto-21 AS build
+FROM node:lts AS fe-build
 
 WORKDIR /app
 
-COPY mvnw .
-COPY pom.xml .
-COPY .mvn/wrapper/* ./.mvn/wrapper/
+# VITE bakes in envars at prod time.
+# hence this cannot be provided via docker-compose
+ENV VITE_BASE_API_URL="http://localhost:8080"
 
-COPY . .
+COPY frontend/package.json .
+COPY frontend/package-lock.json .
 
-RUN ./mvnw package
+RUN npm i
 
-EXPOSE 8080/tcp
+COPY frontend .
 
-CMD ["java", "-jar" ,"target/gTodo-0.0.1-SNAPSHOT.jar"]
+RUN npm run build
+
+CMD ["true"]
+
+FROM nginx:latest AS nginx
+
+COPY --from=fe-build /app/dist/ /usr/share/nginx/html
+
+EXPOSE 80/tcp
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
