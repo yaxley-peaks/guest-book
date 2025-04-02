@@ -32,7 +32,8 @@ public class BackendApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/todos/").allowedOrigins("*");
+                // allow all origins on all endpoints
+                registry.addMapping("/**").allowedOrigins("*");
             }
         };
     }

@@ -4,7 +4,7 @@ WORKDIR /app
 
 # VITE bakes in envars at prod time.
 # hence this cannot be provided via docker-compose
-ENV VITE_BASE_API_URL="http://100.103.10.60"
+ENV VITE_BASE_API_URL="http://localhost:8080"
 
 COPY frontend/package.json .
 COPY frontend/package-lock.json .

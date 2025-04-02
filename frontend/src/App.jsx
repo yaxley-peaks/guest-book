@@ -5,13 +5,15 @@ import {TaskList} from "./components/TaskList.jsx";
 
 
 function App() {
-    const [tasks, setTasks] = useState(/*JSON.parse(localStorage.getItem('tasks')) ?? */[]);
+    const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? []);
     const [searchText, setSearchText] = useState("");
     const latestTaskId = useRef(0);
 
     const fetchUrl = import.meta.env.VITE_BASE_API_URL;
 
     useEffect(() => {
+        console.log(fetchUrl);
+        console.table(import.meta.env);
         const storedTasks = localStorage.getItem('tasks');
         if (storedTasks) {
             const ts = JSON.parse(storedTasks)
@@ -35,7 +37,7 @@ function App() {
     }, [fetchUrl]);
 
     useEffect(() => {
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        // localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks]);
 
     const taskAdderCallback = (title, status) => {
