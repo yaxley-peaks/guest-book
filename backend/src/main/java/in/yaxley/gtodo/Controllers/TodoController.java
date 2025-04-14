@@ -2,11 +2,14 @@ package in.yaxley.gtodo.Controllers;
 
 import in.yaxley.gtodo.Entities.TodoEntry;
 import in.yaxley.gtodo.Repositories.TodoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController("/todos")
 public class TodoController {
@@ -29,5 +32,24 @@ public class TodoController {
         TodoEntry entry = new TodoEntry(dto.getUserId(), dto.getTitle(), dto.isCompleted()) ;
         todos.save(entry);
         return entry;
+    }
+
+    @PatchMapping("/todos/{id}")
+    public TodoEntry changeTodo(@PathVariable int id, @RequestBody TodoEntry dto) {
+        Optional<TodoEntry> existingEntry = todos.findById(id);
+        if(existingEntry.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+        TodoEntry eEntry = existingEntry.get();
+        eEntry.setTitle(dto.getTitle());
+        eEntry.setCompleted(dto.isCompleted());
+        todos.save(eEntry);
+        return eEntry;
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ignored) {
+        return ResponseEntity.notFound().build();
     }
 }
