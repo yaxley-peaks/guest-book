@@ -23,9 +23,11 @@ export function TaskItem(props) {
                 <li className="p-1 m-1 text-xl flex items-center" key={props.task.id}>
                     <input type="text" className="max-w-full w-full m-4 p-4" value={taskTitle} onChange={(e) => {
                         setTaskTitle(e.target.value);
-                        props.onEdit(props.task.id, e.target.value)
                     }}/>
-                    <button title="Save" className="m-1 ml-auto p-1" onClick={() => setEditing(false)}>
+                    <button title="Save" className="m-1 ml-auto p-1" onClick={() => {
+                        setEditing(false);
+                        props.onEdit(props.task.id, taskTitle)
+                    }}>
                         <FontAwesomeIcon icon={faSave}/>
                     </button>
                 </li>

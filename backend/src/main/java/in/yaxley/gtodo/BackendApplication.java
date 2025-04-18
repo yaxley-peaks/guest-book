@@ -33,7 +33,7 @@ public class BackendApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 // allow all origins on all endpoints
-                registry.addMapping("/**").allowedOrigins("*");
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("PUT", "POST", "GET", "DELETE", "OPTIONS", "HEAD", "PATCH");
             }
         };
     }

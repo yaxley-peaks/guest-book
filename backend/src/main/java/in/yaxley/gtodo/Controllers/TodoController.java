@@ -34,7 +34,7 @@ public class TodoController {
         return entry;
     }
 
-    @PatchMapping("/todos/{id}")
+    @PutMapping("/todos/{id}")
     public TodoEntry changeTodo(@PathVariable int id, @RequestBody TodoEntry dto) {
         Optional<TodoEntry> existingEntry = todos.findById(id);
         if(existingEntry.isEmpty()) {

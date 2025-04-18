@@ -48,10 +48,25 @@ function App() {
         })();
     }
     const taskEditCallback = (id, title) => {
-        tasks.find(x => x.id === id).title = title;
-        let t = tasks.slice();
-        t.at(t.findIndex(x => x.id === id)).title = title;
-        setTasks(t);
+        (async () => {
+            const currentTask = tasks.find(x => x.id === id).title = title;
+            let t = tasks.slice();
+            t.at(t.findIndex(x => x.id === id)).title = title;
+            await fetch(`${fetchUrl}/todos/${id}`, {
+                method: "PUT",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    completed: currentTask.status === "1",
+                    id: 0,
+                    userId: 1,
+                })
+            });
+            setTasks(t);
+        })();
     }
     const taskDeleteCallback = (id) => {
         setTasks(tasks.filter(x => x.id !== id))
