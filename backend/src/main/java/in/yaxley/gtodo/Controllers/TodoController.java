@@ -3,6 +3,8 @@ package in.yaxley.gtodo.Controllers;
 import in.yaxley.gtodo.Entities.TodoEntry;
 import in.yaxley.gtodo.Repositories.TodoRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class TodoController {
 
     TodoRepository todos;
+    Logger logger = LoggerFactory.getLogger(TodoController.class);
 
     @Autowired
     public TodoController(TodoRepository repo) {

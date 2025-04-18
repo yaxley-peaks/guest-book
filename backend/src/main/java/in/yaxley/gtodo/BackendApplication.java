@@ -18,7 +18,7 @@ public class BackendApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(TodoRepository repository) {
+    public CommandLineRunner hikariDataSeeder(TodoRepository repository) {
         return args -> {
             repository.save(new TodoEntry(1, "TODO 1", false));
             repository.save(new TodoEntry(1, "TODO 2", true));
