@@ -69,7 +69,16 @@ function App() {
         })();
     }
     const taskDeleteCallback = (id) => {
-        setTasks(tasks.filter(x => x.id !== id))
+        (async () => {
+            await fetch(`${fetchUrl}/todos/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            });
+            setTasks(tasks.filter(x => x.id !== id))
+        })();
     }
     const taskDoneCallback = (id, isDone) => {
         let t = tasks.slice();
