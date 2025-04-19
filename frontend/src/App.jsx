@@ -81,9 +81,26 @@ function App() {
         })();
     }
     const taskDoneCallback = (id, isDone) => {
-        let t = tasks.slice();
-        t.at(t.findIndex(x => x.id === id)).completed = isDone;
-        setTasks(t);
+        console.log(isDone);
+        (async () => {
+            const currentTask = tasks.find(x => x.id === id);
+            await fetch(`${fetchUrl}/todos/${id}`, {
+                method: "PUT",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: currentTask.title,
+                    completed: isDone,
+                    id: 0,
+                    userId: 1,
+                })
+            });
+            let t = tasks.slice();
+            t.at(t.findIndex(x => x.id === id)).completed = isDone;
+            setTasks(t);
+        })();
     }
 
     return (<div className="grid grid-cols-1 gap-4">
