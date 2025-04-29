@@ -6,6 +6,8 @@ COPY mvnw .
 COPY pom.xml .
 COPY .mvn/wrapper/* ./.mvn/wrapper/
 
+RUN ./mvnw dependency:go-offline
+
 COPY . .
 
 RUN ./mvnw package
