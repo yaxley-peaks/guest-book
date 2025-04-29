@@ -14,11 +14,11 @@ import java.util.Optional;
 @RestController
 public class TodoController {
 
-   private final TodoRepository todos;
+    private final TodoRepository todos;
 
     @Autowired
     public TodoController(TodoRepository repo) {
-       this.todos = repo;
+        this.todos = repo;
     }
 
     @GetMapping("/todos")
@@ -29,7 +29,7 @@ public class TodoController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/todos")
     public TodoEntry addTodo(@RequestBody TodoEntry dto) {
-        TodoEntry entry = new TodoEntry(dto.getUserId(), dto.getTitle(), dto.isCompleted()) ;
+        TodoEntry entry = new TodoEntry(dto.getUserId(), dto.getTitle(), dto.isCompleted());
         todos.save(entry);
         return entry;
     }
@@ -37,7 +37,7 @@ public class TodoController {
     @PutMapping("/todos/{id}")
     public TodoEntry changeTodo(@PathVariable int id, @RequestBody TodoEntry dto) {
         Optional<TodoEntry> existingEntry = todos.findById(id);
-        if(existingEntry.isEmpty()) {
+        if (existingEntry.isEmpty()) {
             throw new EntityNotFoundException();
         }
         TodoEntry eEntry = existingEntry.get();
@@ -50,7 +50,7 @@ public class TodoController {
     @DeleteMapping("/todos/{id}")
     public ResponseEntity<?> deleteTodo(@PathVariable int id) {
         Optional<TodoEntry> oEntry = todos.findById(id);
-        if(oEntry.isEmpty()) {
+        if (oEntry.isEmpty()) {
             throw new EntityNotFoundException();
         }
         todos.delete(oEntry.get());

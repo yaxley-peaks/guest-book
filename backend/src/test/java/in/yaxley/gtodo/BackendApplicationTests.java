@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -19,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class BackendApplicationTests {
 
-    private  final TodoRepository todos;
+    private final TodoRepository todos;
     private final MockMvc mockMvc;
 
     @Autowired
@@ -35,7 +34,7 @@ class BackendApplicationTests {
         if (c > 0) {
             log.atInfo().log("Found {} existing todos, skipping seeding", c);
             return;
-        };
+        }
         final int count = 10;
         for (int i = 0; i < count; i++) {
             TodoEntry entry = new TodoEntry(1, "Todo" + i, i % 2 == 0);
