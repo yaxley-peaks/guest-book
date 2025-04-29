@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController("/todos")
+@RestController
 public class TodoController {
 
    private final TodoRepository todos;
@@ -21,13 +21,13 @@ public class TodoController {
        this.todos = repo;
     }
 
-    @GetMapping("/todos/")
-    public List<TodoEntry> getTodos() {
-        return (List<TodoEntry>) todos.findAll();
+    @GetMapping("/todos")
+    public ResponseEntity<List<TodoEntry>> getTodos() {
+        return ResponseEntity.ok((List<TodoEntry>) todos.findAll());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/todos/")
+    @PostMapping("/todos")
     public TodoEntry addTodo(@RequestBody TodoEntry dto) {
         TodoEntry entry = new TodoEntry(dto.getUserId(), dto.getTitle(), dto.isCompleted()) ;
         todos.save(entry);
