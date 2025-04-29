@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="BackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <envs>
+      <env name="POSTGRES_DB" value="test" />
+      <env name="POSTGRES_HOST" value="localhost" />
+      <env name="POSTGRES_PASSWORD" value="40455663" />
+      <env name="POSTGRES_USER" value="yax" />
+    </envs>
+    <module name="gTodo" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="in.yaxley.gtodo.BackendApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

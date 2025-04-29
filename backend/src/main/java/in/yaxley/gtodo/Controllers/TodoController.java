@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController("/todos")
 public class TodoController {
 
-    TodoRepository todos;
+   private final TodoRepository todos;
 
     @Autowired
     public TodoController(TodoRepository repo) {
